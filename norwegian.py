@@ -91,11 +91,16 @@ class PartitionedDataset(Dataset):
 
 class KariBERTaTokenizer(ByteLevelBPETokenizer):
     def __init__(self, tokenizer_name, max_len=None):
-        vocab_file = f"{tokenizer_name}/kariberta-vocab.json"
-        merges_file = f"{tokenizer_name}/kariberta-merges.txt"
         self.max_len = max_len if max_len is not None else int(1e12)
         self._pad_token = PAD_TOKEN
         self.mask_token = MASK_TOKEN
+        vocab_file = f"{tokenizer_name}/kariberta-vocab.json"
+        merges_file = f"{tokenizer_name}/kariberta-merges.txt"
+        try:
+            super().__init__(vocab_file, merges_file)
+        except:
+            vocab_file = f"{tokenizer_name}/vocab.json"
+            merges_file = f"{tokenizer_name}/merges.txt"
         super().__init__(vocab_file, merges_file)
         self.pad_token_id = self.token_to_id(PAD_TOKEN)
         self.mask_token_id = self.token_to_id(MASK_TOKEN)
