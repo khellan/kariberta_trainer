@@ -7,7 +7,7 @@ paths = ['data/train/t5.txt']
 
 tokenizer = ByteLevelBPETokenizer()
 
-tokenizer.train(files=paths, vocab_size=52_000, min_frequency=2, special_tokens=[
+tokenizer.train(files=paths, vocab_size=25_000, min_frequency=2, special_tokens=[
     "<s>",
     "<pad>",
     "</s>",
@@ -15,4 +15,4 @@ tokenizer.train(files=paths, vocab_size=52_000, min_frequency=2, special_tokens=
     "<mask>",
 ])
 
-tokenizer.save(".", "kariberta-tiny")
+tokenizer.save("models", "KariBERTa-small")
