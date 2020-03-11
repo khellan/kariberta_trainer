@@ -24,14 +24,14 @@ pipenv install
 ## Training server
 I used Ubuntu. A similar approach should work for CentOS as well. 
 
-'''
+```
 sudo apt install python3 python3-distutils python3-pip
 pip3 install pipenv
 git clone https://www.github.com/nvidia/apex
 cd <your training directory>
 pipenv install --python /usr/bin/python3
 pipenv run pip install -v --no-cache-dir --global-option="--cpp_ext" --global-option="--cuda_ext" ~/apex
-'''
+```
 
 ## Training
 
@@ -39,18 +39,18 @@ pipenv run pip install -v --no-cache-dir --global-option="--cpp_ext" --global-op
 
 Before training, the tokenizer needs to be trained. There is no need for a GPU and my MacBook Air did this just as quickly as a beefy server.
 
-'''
+```
 pipenv run python train_tokenizer.py
-'''
+```
 
 ### Training the language model
 
 This may be run on a tiny set on a development box, but use a GPU server to train anything useful.
 
-'''
+```
 cd <your training directory>
 ./train.sh
-'''
+```
 
 I like to run that in tmux with two other tmux windows open for observation:
 1. *top* to see CPU and memory use
