@@ -134,6 +134,14 @@ class KariBERTaTokenizer(ByteLevelBPETokenizer):
         encoding = self._tokenizer.encode(sentence)
         return encoding.tokens
 
+    def encode_line(self, line):
+        encoding = self._tokenizer.encode(line)
+        return encoding.ids
+
+    def batch_encode_plus(self, lines, add_special_tokens=True, max_length=None):
+        input_ids = [self.encode_line(line) for line in lines]
+        return {'input_ids': input_ids}
+
     def build_inputs_with_special_tokens(self, token_ids_0, token_ids_1=None):
         cls = [self.token_to_id(START_TOKEN)]
         sep = [self.token_to_id(STOP_TOKEN)]
